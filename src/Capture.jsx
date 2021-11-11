@@ -50,10 +50,10 @@ export default class Capture extends Component {
         canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
         faceapi.draw.drawDetections(canvas, resizedDetections);
         var imgBase64 = canvas.toDataURL("image/jpeg",1);
-        axios.post("http://localhost:8080/api/face/postFace", {
+       /*axios.post("http://localhost:8080/api/face/postFace", {
             imagebase64: imgBase64,
-          })
-          /* .then(function (response) {
+          }) 
+          .then(function (response) {
             let username = response.data.data.username
              if (response.data.data.username != null) {
               console.log("人脸识别成功");
@@ -62,10 +62,24 @@ export default class Capture extends Component {
           })
           .catch(function (error) {
             console.log(error);
-          }) */;
+          });*/
+          this.setState({face_feature:imgBase64});
+          console.log("face_feature,",this.state.face_feature);
       }
     }, 200);
   };
+
+  startLog=()=>{
+   /*  console.log("state",this.state);
+    const userName = this.state.userInfo.user_info
+    const courseName = this.state.userInfo.group_id
+    const userId = this.state.userInfo.user_id
+    console.log(userName,courseName,userId) */
+   /*  axios.post("http://localhost:8080/api/face/postFace", {
+         
+          }) 
+ */
+  }
 
   render() {
     return (
@@ -78,6 +92,7 @@ export default class Capture extends Component {
           autoPlay
         ></video>
         <canvas id="myCanvas"></canvas>
+        {/* <button onClick={this.startLog}>Start check attdence</button> */}
       </div>
     );
   }
