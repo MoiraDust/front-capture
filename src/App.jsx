@@ -14,6 +14,7 @@ import {
   ModalFooter,
 } from "reactstrap";
 import { Button, Input, Form, FormGroup, Label, FormText } from "reactstrap";
+import moment from "moment";
 
 import Capture from "./Capture.jsx";
 
@@ -112,15 +113,19 @@ export default class App extends Component {
     const courseName = this.state.userInfo.group_id;
     const userId = this.state.userInfo.user_id;
     console.log(userName, courseName, userId);
+    const time = moment().format('YYYY-MM-DD HH:mm:ss');
+    /* const time = Date.parse(new Date()); */
     axios
-      .post("http://localhost:8080/ai/api/postFace", {
+      .post("http://localhost:8080/ai/api/postAttendance", {
         //api写完
         userName: userName,
         courseName: courseName,
         userId: userId,
+        time:time
       })
       .then(function (response) {
-        console.log("然后在这里call考勤打开API");
+        console.log("Attdance check page");
+        console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);
